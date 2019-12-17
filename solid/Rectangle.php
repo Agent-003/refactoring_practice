@@ -1,6 +1,8 @@
 <?php
 
-//Hint - Liskov Substitution Principle
+// Hint - Liskov Substitution Principle
+// Принцип подстановки Барбары Лисков
+
 class Rectangle
 {
     protected $width;
@@ -36,13 +38,13 @@ class Square extends Rectangle
 {
     public function setHeight($value)
     {
+        parent::setHeight();
         $this->width = $value;
-        $this->height = $value;
     }
 
     public function setWidth($value)
     {
-        $this->width = $value;
+        parent::setWidth();
         $this->height = $value;
     }
 }
@@ -58,8 +60,6 @@ class RectangleTest
 
     public function testArea()
     {
-        $this->rectangle->setHeight(2);
-        $this->rectangle->setWidth(3);
         if ($this->rectangle->area() !== 6) {
             return "Bad area \n";
         } else {
@@ -69,9 +69,14 @@ class RectangleTest
 }
 
 $rectangle = new Rectangle();
+$rectangle->setHeight(2);
+$rectangle->setWidth(3);
+
+
 echo "Calc area for rectangle \n";
 $rectangleTest = new RectangleTest($rectangle);
 echo $rectangleTest->testArea();
+
 
 $square = new Square();
 echo "Calc area for square \n";
