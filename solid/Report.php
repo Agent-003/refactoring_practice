@@ -1,16 +1,20 @@
 <?php
 
 //Hint - use Single Responsibility Principle Violation
+// Принцип единственной ответственности
 class Report
 {
+    protected $title='Report Title';
+    protected $data='2016-04-21' ;
+
     public function getTitle()
     {
-        return 'Report Title';
+        return $this->title;
     }
 
     public function getDate()
     {
-        return '2016-04-21';
+        return $this->data;
     }
 
     public function getContents()
@@ -20,9 +24,21 @@ class Report
             'date' => $this->getDate(),
         ];
     }
+}
 
-    public function formatJson()
+
+class Format
+{
+    public $content;
+
+    public function formatJson(Report $content)
     {
-        return json_encode($this->getContents());
+        return json_encode($this->content->getContents());
     }
 }
+
+
+$test=new Report();
+$testFormat=new Format();
+$testFormat->content=$test;
+var_dump($testFormat->formatJson($test));
