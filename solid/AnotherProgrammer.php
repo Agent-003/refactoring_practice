@@ -1,33 +1,42 @@
 <?php
 
-//Hint - Open Closed Principle
-class AnotherProgrammer
+// Hint - Open Closed Principle
+// Принцип открытости/закрытости
+
+class Worker
 {
-    public function code()
-    {
-        return 'coding';
+    protected $work;
+
+    protected function working(){
+        return $this->work;
     }
 }
-class Tester
+
+class AnotherProgrammer extends Worker
 {
-    public function test()
-    {
-        return 'testing';
-    }
+    protected $work='coding';
+}
+
+class Tester extends Worker
+{
+    protected $work='testing';
 }
 
 /** Что если добавить еще класс Designer с методом draw() **/
-
-class ProjectManagement
+class Designer extends Worker
 {
-    public function process($member)
-    {
-        if ($member instanceof AnotherProgrammer) {
-            $member->code();
-        } elseif ($member instanceof Tester) {
-            $member->test();
-        };
-        throw new Exception('Invalid input member');
-    }
+    protected $work='draw';
 }
 
+
+class ProjectManagement extends Worker
+{
+
+    public function process($member)
+    {
+        if (!$member instanceof Worker) {
+            throw new Exception('Invalid input member');
+        }
+        return $member->working();
+    }
+}

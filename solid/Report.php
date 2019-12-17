@@ -36,9 +36,3 @@ class Format
         return json_encode($this->content->getContents());
     }
 }
-
-
-$test=new Report();
-$testFormat=new Format();
-$testFormat->content=$test;
-var_dump($testFormat->formatJson($test));
