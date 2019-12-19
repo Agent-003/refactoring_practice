@@ -22,7 +22,6 @@ class SendWelcomeMessage
     {
        return $this->mailer->getWelcomeMessage();
     }
-
 }
 
 class Goolge implements Mailer
@@ -39,7 +38,8 @@ class Goolge implements Mailer
         return $this->message;
     }
 
-    public function getWelcomeMessage() {
+    public function getWelcomeMessage()
+    {
         return "Welcome from ".$this->settings['user'];
     }
 }
@@ -58,7 +58,8 @@ class Sendgrid implements Mailer
         return $this->message;
     }
 
-    public function getWelcomeMessage() {
+    public function getWelcomeMessage()
+    {
         return "Welcome from ".$this->settings['user'];
     }
 }
@@ -76,7 +77,8 @@ class Mailchimp implements Mailer
         return $this->message;
     }
 
-    public function getWelcomeMessage() {
+    public function getWelcomeMessage()
+    {
         return "Welcome from ".$this->settings['user'];
     }
 }
@@ -84,5 +86,9 @@ class Mailchimp implements Mailer
 $SendWelcomeGoolge=new Goolge;
 $SendWelcomeSendgrid=new Sendgrid;
 $SendWelcomeMailchimp=new Mailchimp;
+$send=New SendWelcomeMessage($SendWelcomeGoolge);
+echo $send->sendWelcome();
+$send=New SendWelcomeMessage($SendWelcomeSendgrid);
+echo $send->sendWelcome();
 $send=New SendWelcomeMessage($SendWelcomeMailchimp);
 echo $send->sendWelcome();
