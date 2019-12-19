@@ -26,7 +26,6 @@ class Report
     }
 }
 
-
 class Format
 {
     public $content;
