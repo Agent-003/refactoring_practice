@@ -26,10 +26,14 @@ class Tester extends Worker
 class Designer extends Worker
 {
     protected $work='draw';
+
+    public function draw()
+    {
+        return "some kind of picture";
+    }
 }
 
-
-class ProjectManagement extends Worker
+class ProjectManager extends Worker
 {
 
     public function process($member)
