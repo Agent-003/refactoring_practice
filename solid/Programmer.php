@@ -1,19 +1,21 @@
 <?php
 
-//Hint - Interface Segregation Principle
-interface Workable
+// Hint - Interface Segregation Principle
+// Принцип разделения интерфейса
+
+interface CanСode
 {
-    public function canCode();
     public function code();
+}
+
+interface CanTest
+{
     public function test();
 }
 
-class Programmer implements Workable
+
+class Programmer implements CanСode, CanTest
 {
-    public function canCode()
-    {
-        return true;
-    }
     public function code()
     {
         return 'coding';
@@ -24,16 +26,8 @@ class Programmer implements Workable
     }
 }
 
-class Tester implements Workable
+class Tester implements CanTest
 {
-    public function canCode()
-    {
-        return false;
-    }
-    public function code()
-    {
-        throw new Exception('Opps! I can not code');
-    }
     public function test()
     {
         return 'testing in test server';
@@ -42,10 +36,13 @@ class Tester implements Workable
 
 class ProjectManagement
 {
-    public function processCode(Workable $member)
+
+    public function processCode(canСode $member)
     {
-        if ($member->canCode()) {
-            $member->code();
-        }
+        $member->code();
+    }
+
+    public function processTest(CanTest $member){
+        $member->test();
     }
 }
